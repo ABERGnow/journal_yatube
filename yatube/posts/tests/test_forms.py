@@ -38,7 +38,10 @@ class PostFormTests(TestCase):
             description=mixer.RANDOM,
         )
         cls.post = Post.objects.create(
-            text="Текст поста", group=cls.group, author=cls.user, image=cls.uploaded
+            text="Текст поста",
+            group=cls.group,
+            author=cls.user,
+            image=cls.uploaded
         )
         cls.comment = mixer.blend(
             Comment,

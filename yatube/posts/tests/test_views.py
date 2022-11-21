@@ -170,12 +170,10 @@ class PostViewsTests(TestCase):
             reverse("posts:index"): Post.objects.get(group=self.post.group),
             reverse("posts:group_list",
                     args=({self.group.slug})): Post.objects.get(
-                    group=self.post.group
-            ),
+                        group=self.post.group),
             reverse("posts:profile",
                     args=({self.post.author})): Post.objects.get(
-                    group=self.post.group
-            ),
+                        group=self.post.group),
         }
         for value, expacted in form_fields.items():
             with self.subTest(value=value):
@@ -187,8 +185,9 @@ class PostViewsTests(TestCase):
         """Проверка принадлежности поста к своей группе."""
         form_fields = {
             reverse(
-                "posts:group_list", args=({self.group.slug}
-            )): Post.objects.exclude(group=self.post.group)
+                "posts:group_list",
+                args=({self.group.slug})): Post.objects.exclude(
+                    group=self.post.group)
         }
         for value, expacted in form_fields.items():
             with self.subTest(value=value):
@@ -213,8 +212,8 @@ class PaginatorViewsTest(TestCase):
         for i in range(TEST_OF_POST):
             bulk_post.append(
                 Post(text=f"Тестовый пост {i}",
-                group=self.group,
-                author=self.user)
+                     group=self.group,
+                     author=self.user)
             )
         Post.objects.bulk_create(bulk_post)
 
