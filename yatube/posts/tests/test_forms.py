@@ -107,7 +107,8 @@ class PostFormTests(TestCase):
             data=form_data,
             follow=True,
         )
-        self.assertRedirects(response, f"/auth/login/?next=/posts/{self.post.pk}/edit/")
+        self.assertRedirects(response,
+                             f"/auth/login/?next=/posts/{self.post.pk}/edit/")
         self.assertEqual(Post.objects.count(), posts_count)
         self.assertFalse(Post.objects.filter(text="Изменяем текст").exists())
         self.assertEqual(response.status_code, HTTPStatus.OK)
@@ -125,7 +126,9 @@ class PostFormTests(TestCase):
         )
         self.assertEqual(Comment.objects.count(), 1)
         comment = Comment.objects.first()
-        self.assertTrue(Comment.objects.filter(text=self.comment.text).exists())
+        self.assertTrue(
+            Comment.objects.filter(text=self.comment.text).exists()
+        )
         self.assertEqual(comment.text, form_data["text"])
         self.assertEqual(comment.author, form_data["author"])
         self.assertEqual(response.status_code, HTTPStatus.OK)
