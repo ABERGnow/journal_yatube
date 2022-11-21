@@ -1,0 +1,3 @@
+TEN_POSTS: int = 10
+THREE_POSTS: int = 3
+TEST_OF_POST: int = 13
