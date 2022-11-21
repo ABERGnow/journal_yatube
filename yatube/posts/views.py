@@ -8,7 +8,8 @@ from .utils import page_list
 
 def index(request):
     """Выводит шаблон главной страницы."""
-    page_obj = page_list(Post.objects.select_related("author", "group"), request)
+    page_obj = page_list(
+        Post.objects.select_related("author", "group"), request)
     context = {"page_obj": page_obj}
     return render(request, "posts/index.html", context)
 
@@ -42,7 +43,8 @@ def profile(request, username):
 
 def post_detail(request, post_id):
     """Выводит шаблон информации поста."""
-    post = get_object_or_404(Post.objects.select_related("author", "group"), pk=post_id)
+    post = get_object_or_404(
+        Post.objects.select_related("author", "group"), pk=post_id)
     author_posts = post.author.posts.all().count()
     comments_form = CommentForm(request.POST or None)
     comments = Comment.objects.filter(post=post)
