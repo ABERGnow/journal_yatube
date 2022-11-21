@@ -289,4 +289,4 @@ class FollowTests(TestCase):
         post_text_0 = response.context["page_obj"][0].text
         self.assertEqual(post_text_0, "Тестовая запись")
         response = self.auth_following.get(reverse("posts:follow_index"))
-        self.assertNotContains(response, "Тестовая запись")
+        self.assertNotContains(response, self.post.text == 0)
