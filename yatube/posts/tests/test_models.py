@@ -67,8 +67,6 @@ class GroupModelTest(TestCase):
             description=mixer.RANDOM,
         )
         cache.clear()
-        
-
 
     def test_model_group_have_correct_object_names(self):
         """Проверяем, что у моделей корректно работает __str__."""

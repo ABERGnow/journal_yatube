@@ -8,8 +8,7 @@ from .utils import page_list
 
 def index(request):
     """Выводит шаблон главной страницы."""
-    page_obj = page_list(
-        Post.objects.select_related("author", "group"), request)
+    page_obj = page_list(Post.objects.select_related("author", "group"), request)
     context = {"page_obj": page_obj}
     return render(request, "posts/index.html", context)
 
@@ -30,7 +29,7 @@ def profile(request, username):
     """Выводит шаблон профайла пользователя."""
     author = get_object_or_404(User, username=username)
     page_obj = page_list(author.posts.all(), request)
-    following=False
+    following = False
     if request.user.is_authenticated:
         following = request.user.follower.filter(author=author).exists()
     context = {
@@ -43,8 +42,7 @@ def profile(request, username):
 
 def post_detail(request, post_id):
     """Выводит шаблон информации поста."""
-    post = get_object_or_404(
-        Post.objects.select_related("author", "group"), pk=post_id)
+    post = get_object_or_404(Post.objects.select_related("author", "group"), pk=post_id)
     author_posts = post.author.posts.all().count()
     comments_form = CommentForm(request.POST or None)
     comments = Comment.objects.filter(post=post)
@@ -112,16 +110,16 @@ def add_comment(request, post_id):
         comment.author = request.user
         comment.post = post
         comment.save()
-    return redirect('posts:post_detail', post_id=post_id)
+    return redirect("posts:post_detail", post_id=post_id)
 
 
 @login_required
 def follow_index(request):
     page_obj = page_list(
-        Post.objects.filter(
-            author__following__user=request.user), request)
-    context = {'page_obj': page_obj}
-    return render(request, 'posts/follow.html', context)
+        Post.objects.filter(author__following__user=request.user), request
+    )
+    context = {"page_obj": page_obj}
+    return render(request, "posts/follow.html", context)
 
 
 @login_required
@@ -132,7 +130,7 @@ def profile_follow(request, username):
         not request.user.follower.filter(author=author).exists()
     ):
         Follow.objects.create(user=request.user, author=author)
-    return redirect('posts:profile', username)
+    return redirect("posts:profile", username)
 
 
 @login_required
@@ -142,5 +140,4 @@ def profile_unfollow(request, username):
     follower = request.user.follower.filter(author=author)
     if follower.exists():
         follower.delete()
-    return redirect('posts:profile', author.username)
-
+    return redirect("posts:profile", author.username)

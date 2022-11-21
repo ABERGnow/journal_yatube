@@ -30,7 +30,6 @@ class PostURLTests(TestCase):
         cls.GROUP_LIST_URL = f"/group/{cls.group.slug}/"
         cls.POST_DETAIL_URL = f"/posts/{cls.post.pk}/"
         cls.POST_CREATE_URL = "/create/"
-        
 
     def setUp(self):
         self.anon = Client()
@@ -82,7 +81,6 @@ class PostURLTests(TestCase):
             (self.GROUP_LIST_URL, "posts/group_list.html"),
             (self.POST_DETAIL_URL, "posts/post_detail.html"),
             (self.POST_CREATE_URL, "posts/create_post.html"),
-            
         )
         for url, template in templates_url_names:
             with self.subTest(template=template):

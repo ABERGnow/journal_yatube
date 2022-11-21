@@ -39,8 +39,8 @@ class Post(CreatedModel):
         help_text="Группа, к которой будет относиться пост",
     )
     image = models.ImageField(
-        verbose_name='Картинка',
-        upload_to='posts/',
+        verbose_name="Картинка",
+        upload_to="posts/",
         blank=True,
     )
 
@@ -48,8 +48,8 @@ class Post(CreatedModel):
         """Внутренний класс, для изменения поведения полей модели."""
 
         ordering = ["-pub_date"]
-        verbose_name = 'Пост',
-        verbose_name_plural = 'Посты'
+        verbose_name = ("Пост",)
+        verbose_name_plural = "Посты"
 
     def __str__(self):
         """Выводит поле text, при печати объекта модели Post."""
@@ -59,18 +59,18 @@ class Post(CreatedModel):
 class Comment(CreatedModel):
     """Модель для хранения комментариев."""
 
-    post=models.ForeignKey(
+    post = models.ForeignKey(
         Post,
         related_name="comments",
         on_delete=models.CASCADE,
     )
-    author=models.ForeignKey(
+    author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name="comments",
         verbose_name="Автор",
     )
-    text=models.TextField(
+    text = models.TextField(
         "Текст комментария",
         help_text="Введите текс комментария",
     )
@@ -78,13 +78,13 @@ class Comment(CreatedModel):
     class Meta:
         """Внутренний класс, для изменения поведения полей модели."""
 
-        ordering = ['-pub_date']
-        verbose_name = 'Коментарий',
-        verbose_name_plural = 'Коментарии'
+        ordering = ["-pub_date"]
+        verbose_name = ("Коментарий",)
+        verbose_name_plural = "Коментарии"
 
     def __str__(self) -> str:
         return self.text
-        
+
 
 class Follow(models.Model):
     """Модель подписки на автора поста."""
@@ -92,12 +92,12 @@ class Follow(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='follower',
+        related_name="follower",
         verbose_name="Подписчик",
     )
-    author =  models.ForeignKey(
+    author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='following',
+        related_name="following",
         verbose_name="Автор",
     )
