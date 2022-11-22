@@ -108,8 +108,7 @@ class PostFormTests(TestCase):
             follow=True,
         )
         self.assertRedirects(response,
-                             f"/auth/login/?next=/posts/{self.post.pk}/edit/"
-        )
+                             f"/auth/login/?next=/posts/{self.post.pk}/edit/")
         self.assertEqual(Post.objects.count(), posts_count)
         self.assertFalse(Post.objects.filter(text="Изменяем текст").exists())
         self.assertEqual(response.status_code, HTTPStatus.OK)
