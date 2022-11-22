@@ -5,7 +5,9 @@
 <div class="mb-5">
 {% if author == user %}
     <h3>Все ваши посты</h3>
-    <h4>Всего постов: {{ author.posts.all.count }}</h4>
+    <h4>Всего постов: {{ author.posts.count }}</h4>
+    <h3>Подписчиков: {{ author.following.count }}</h3>
+    <h3>Подписок: {{ user.follower.count }}</h3>
 {% else %}
     <h3>Все посты пользователя {{ author }}</h3>
     <h4>Всего постов: {{ author.posts.all.count }}</h4>

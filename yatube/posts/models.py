@@ -47,8 +47,8 @@ class Post(CreatedModel):
     class Meta:
         """Внутренний класс, для изменения поведения полей модели."""
 
-        ordering = ["-pub_date"]
-        verbose_name = ("Пост",)
+        ordering = ("-pub_date",)
+        verbose_name = "Пост"
         verbose_name_plural = "Посты"
 
     def __str__(self):
@@ -78,8 +78,8 @@ class Comment(CreatedModel):
     class Meta:
         """Внутренний класс, для изменения поведения полей модели."""
 
-        ordering = ["-pub_date"]
-        verbose_name = ("Коментарий",)
+        ordering = ('-pub_date',)
+        verbose_name = "Коментарий"
         verbose_name_plural = "Коментарии"
 
     def __str__(self) -> str:

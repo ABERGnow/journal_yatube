@@ -46,7 +46,7 @@ def post_detail(request, post_id):
     post = get_object_or_404(
         Post.objects.select_related("author", "group"), pk=post_id)
     author_posts = post.author.posts.all().count()
-    comments_form = CommentForm(request.POST or None)
+    comments_form = CommentForm(request.POST)
     comments = Comment.objects.filter(post=post)
     context = {
         "post": post,
@@ -60,18 +60,15 @@ def post_detail(request, post_id):
 @login_required
 def post_create(request):
     """Выводит шаблон создания поста."""
-    if request.method == "POST":
-        form = PostForm(
-            request.POST or None,
-            files=request.FILES or None,
-        )
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect("posts:profile", post.author.username)
-        return render(request, "posts/create_post.html", {"form": form})
-    form = PostForm()
+    form = PostForm(
+        request.POST or None,
+        files=request.FILES or None,
+    )
+    if form.is_valid():
+        post = form.save(commit=False)
+        post.author = request.user
+        post.save()
+        return redirect("posts:profile", post.author.username)
     return render(request, "posts/create_post.html", {"form": form})
 
 
@@ -79,28 +76,22 @@ def post_create(request):
 def post_edit(request, post_id):
     """Выводит шаблон редактирования поста."""
     post = get_object_or_404(Post, pk=post_id)
-    if post.author == request.user:
-        if request.method == "POST":
-            form = PostForm(
-                request.POST or None,
-                files=request.FILES or None,
-                instance=post,
-            )
-            if form.is_valid():
-                form.save()
-                return redirect("posts:post_detail", post_id)
-        form = PostForm(instance=post)
-        return render(
-            request,
-            "posts/create_post.html",
-            {
-                "form": form,
-                "post": post,
-                "is_edit": True,
-            },
-        )
-    return render("posts:post_detail", post_id)
-
+    if post.author != request.user:
+        return redirect("posts:post_detail", post_id)
+    form = PostForm(
+        request.POST or None,
+        files=request.FILES or None,
+        instance=post,
+    )
+    if form.is_valid():
+        form.save()
+        return redirect("posts:post_detail", post_id)
+    context = {"post": post,
+               "form": form,
+               "is_edit": True,
+    }
+    return render(request, "posts/create_post.html", context)
+    
 
 @login_required
 def add_comment(request, post_id):
