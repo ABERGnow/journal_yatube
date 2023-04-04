@@ -28,7 +28,9 @@ class PostFormTests(TestCase):
             b"\x0A\x00\x3B"
         )
         cls.uploaded = SimpleUploadedFile(
-            name="small.gif", content=cls.small_gif, content_type="image/gif"
+            name="small.gif",
+            content=cls.small_gif,
+            content_type="image/gif"
         )
         cls.user = User.objects.create_user(username="auth")
         cls.group = mixer.blend(

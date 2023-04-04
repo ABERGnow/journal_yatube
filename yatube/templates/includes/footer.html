@@ -1,4 +1,5 @@
 <footer class="border-top text-center py-3">
+    <br>
         <a class="nav-link {% if view_name  == 'about:author' %}active{% endif %}" href="{% url 'about:author' %}">Об авторе</a>
         <a class="nav-link {% if view_name  == 'about:tech' %}active{% endif %}" href="{% url 'about:tech' %}">Технологии</a>
     <p>© {{ year }} Copyright <span style="color:red">Ya</span>tube</p>    

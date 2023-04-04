@@ -30,9 +30,8 @@ def profile(request, username):
     """Выводит шаблон профайла пользователя."""
     author = get_object_or_404(User, username=username)
     page_obj = page_list(author.posts.all(), request)
-    following = False
-    if request.user.is_authenticated:
-        following = request.user.follower.filter(author=author).exists()
+    following = request.user.is_authenticated and (
+        request.user.follower.filter(author=author))
     context = {
         "author": author,
         "page_obj": page_obj,

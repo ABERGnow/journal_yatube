@@ -14,7 +14,7 @@
     </li>
   </ul>
   {% thumbnail post.image "960x339" crop="center" upscale=True as im %}
-    <img class="card-img my-2" src="{{ im.url }}">
+    <a href={{ im.url }}><img class="card-img my-2" src="{{ im.url }}"></a>
   {% endthumbnail %}      
   <p>{{ post.text }}</p>
   <a href="{% url 'posts:post_detail' post.pk %}">подробная информация </a>
