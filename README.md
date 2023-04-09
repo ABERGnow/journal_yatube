@@ -1,3 +1,27 @@
-# hw05_final
+Учебный проект – социальная сеть для ведения блогов.
+Соц. сеть для ведения личных дневников.
+Возможности пользователя:
 
-[![CI](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)
+создать свой профиль. Реализована система регистрации и аутентификации (есть возможность сменить/восстановить пароль)
+выложить свой пост, воспользовавшись формой на сайте
+upd1: пост может быть опубликован в конкретном сообществе
+upd2: добавлена возможность прикреплять к постам изображения
+подписаться/отписаться на другого пользователя, формируя свою личную страницу избранных публикаций
+оставлять комментарии к публикациям
+Запуск проекта в dev-режиме
+клонировать репозиторий
+git clone git@github.com:viator3m/journals.git
+в директории с проектом создать виртуальное окружение
+python -m venv venv
+установить зависимости
+pip install -r requirements.txt
+применить миграции
+python manage.py makemigrations
+python manage.py migrate
+запустить сервер
+python manage.py runserver
+Для входа в админ-зону:
+
+создать суперпользователя
+python manage.py createsuperuser
+перейти по адресу localhost:8000/admin/
