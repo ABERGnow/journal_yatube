@@ -1,12 +1,14 @@
 import os
 
+from django.core.management.utils import get_random_secret_key
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = "@20%b(^hrr$7+286d2qxr_8*fzu0_&az0(4x=oy#a*sdsz=v7s"
+SECRET_KEY = get_random_secret_key()
 
 CSRF_FAILURE_VIEW = "core.views.csrf_failure"
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
