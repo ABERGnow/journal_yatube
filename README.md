@@ -16,7 +16,7 @@
 
 - клонировать репозиторий
 ```
-git clone 
+git clone https://github.com/ABERGnow/journal_yatube.git
 ```
 - в директории с проектом создать виртуальное окружение
 ```
