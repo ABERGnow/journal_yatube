@@ -8,7 +8,7 @@ SECRET_KEY = get_random_secret_key()
 
 CSRF_FAILURE_VIEW = "core.views.csrf_failure"
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost",
